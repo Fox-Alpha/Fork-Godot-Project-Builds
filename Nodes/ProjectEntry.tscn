@@ -5,6 +5,8 @@ script/source = "extends MarginContainer
 
 var icon_path: String = \"\"
 var project_name : String = \"[unnamed]\"
+var engine_version : String = \"0.0\"
+var project_tags : PackedStringArray = []
 var project_path : String = \"\"
 
 
@@ -13,14 +15,17 @@ func set_project(path: String, callback: Callable):
 	%Path.text = project_path
 	
 	var config := ConfigFile.new()
-	config.load(path.path_join(\"project.godot\"))
-	
-	%Name.text = \"Path not found\"
-		printerr(\"Path not found: %s\" % path)
+	if config.load(path.path_join(\"project.godot\")) != OK:
+		%Name.text = \"Path not found\"
+		printerr(\"%s\" % path)
 		return
 	
 	project_name = config.get_value(\"application\", \"config/name\", \"[unnamed]\")
 	%Name.text = project_name
+	
+	var tags = config.get_value(\"application\", \"config/tags\", PackedStringArray([\"\"]))
+	project_tags = tags if typeof(tags) == TYPE_PACKED_STRING_ARRAY else project_tags.append(tags)
+	#print(project_tags)
 	
 	icon_path = config.get_value(\"application\", \"config/icon\", \"\")
 	if not icon_path.is_empty():
