@@ -2,7 +2,12 @@ extends Control
 
 var user_arguments := OS.get_cmdline_user_args()
 
+@onready var stringfiltercontainer: ScrollContainer = $VBoxContainerFilter/HBoxContainer/StringContainer
+
+
 func _ready() -> void:
+	stringfiltercontainer.changed.connect(_on_filter_changed)
+	
 	var i := user_arguments.find("--open-project")
 	if i > -1:
 		if user_arguments.size() < i + 2:
@@ -32,8 +37,34 @@ func _ready() -> void:
 	
 	for project in project_list.get_sections():
 		var project_entry := preload("res://Nodes/ProjectEntry.tscn").instantiate()
-		$VBoxContainer.add_child(project_entry)
+		%VBoxContainer.add_child(project_entry)
 		project_entry.set_project(project, load_project)
+
+
+func _on_filter_changed():
+	var text : PackedStringArray = stringfiltercontainer.get_strings()
+	if text[0].is_empty():
+		%VBoxContainer.propagate_call("show")
+		return
+
+	print("Searching for ... %s " % text)
+	var regex = RegEx.new()
+	var regextext = "({0})".format([text[0].to_lower()])
+	regex.compile(regextext)
+	
+	var projects = %VBoxContainer.get_children()
+	for p in projects:
+		#print("Searching ... %s " % p.project_name.to_lower())
+		var p_name = p.project_name.to_lower()
+		var result = regex.search(p_name)
+		if result:
+			#print("Match found !")
+			p.show()
+		else:
+			p.hide()
+		pass
+	pass
+
 
 func load_project(project: String):
 	Data.load_project(project)
