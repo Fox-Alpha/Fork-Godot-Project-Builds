@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://eu3eioilmxkb"]
+[gd_scene load_steps=3 format=3 uid="uid://eu3eioilmxkb"]
 
 [ext_resource type="Script" uid="uid://dvh5ayxlc5duu" path="res://Scenes/ProjectManager.gd" id="1_edpqn"]
+[ext_resource type="PackedScene" uid="uid://dnirqftg6lai" path="res://Nodes/GUI/StringProjectFilterContainer.tscn" id="2_dnyxs"]
 
 [node name="ProjectManager" type="ScrollContainer"]
 anchors_preset = 15
@@ -11,7 +12,20 @@ grow_vertical = 2
 script = ExtResource("1_edpqn")
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainerFilter" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainerFilter"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StringContainer" parent="VBoxContainerFilter/HBoxContainer" instance=ExtResource("2_dnyxs")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainerFilter"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
