@@ -20,11 +20,17 @@ func set_project(path: String, callback: Callable):
 		printerr(\"%s\" % path)
 		return
 	
+	#engine_version = config.get_value(\"application\", \"config/name\", \"[unnamed]\")
 	project_name = config.get_value(\"application\", \"config/name\", \"[unnamed]\")
 	%Name.text = project_name
 	
 	var tags = config.get_value(\"application\", \"config/tags\", PackedStringArray([\"\"]))
 	project_tags = tags if typeof(tags) == TYPE_PACKED_STRING_ARRAY else project_tags.append(tags)
+	if project_tags.size() > 0:
+		for p in project_tags:
+			var lab : Label = Label.new()
+			lab.text = \"<%s>\" % p
+			%HFlowContainerTags.add_child(lab)
 	#print(project_tags)
 	
 	icon_path = config.get_value(\"application\", \"config/icon\", \"\")
@@ -106,3 +112,12 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 text = "Path"
+
+[node name="ScrollContainerTags" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="HFlowContainerTags" type="HFlowContainer" parent="MarginContainer/VBoxContainer/ScrollContainerTags"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
