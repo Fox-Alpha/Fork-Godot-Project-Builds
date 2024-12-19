@@ -3,15 +3,26 @@
 [sub_resource type="GDScript" id="GDScript_8e84h"]
 script/source = "extends MarginContainer
 
+var icon_path: String = \"\"
+var project_name : String = \"[unnamed]\"
+var project_path : String = \"\"
+
+
 func set_project(path: String, callback: Callable):
-	%Path.text = path
+	project_path = path
+	%Path.text = project_path
 	
 	var config := ConfigFile.new()
 	config.load(path.path_join(\"project.godot\"))
 	
-	%Name.text = config.get_value(\"application\", \"config/name\", \"[unnamed]\")
+	%Name.text = \"Path not found\"
+		printerr(\"Path not found: %s\" % path)
+		return
 	
-	var icon_path: String = config.get_value(\"application\", \"config/icon\", \"\")
+	project_name = config.get_value(\"application\", \"config/name\", \"[unnamed]\")
+	%Name.text = project_name
+	
+	icon_path = config.get_value(\"application\", \"config/icon\", \"\")
 	if not icon_path.is_empty():
 		var image := Image.load_from_file(icon_path.replace(\"res:/\", path))
 		%Icon.texture = ImageTexture.create_from_image(image)
