@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnirqftg6lai"]
+
+[ext_resource type="Script" path="res://Nodes/GUI/StringProjectFilterContainer.gd" id="1_3nh7i"]
+[ext_resource type="Texture2D" uid="uid://dyfjn7dxhnwql" path="res://Icons/Search.svg" id="2_3nh7i"]
+
+[node name="StringProjectFilterContainer" type="ScrollContainer"]
+custom_minimum_size = Vector2(200, 0)
+offset_right = 187.0
+offset_bottom = 28.0
+size_flags_horizontal = 3
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+script = ExtResource("1_3nh7i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Strings" type="HBoxContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="StringPrefab" type="LineEdit" parent="HBoxContainer/Strings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+expand_to_text_length = true
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_3nh7i")
+
+[connection signal="text_submitted" from="HBoxContainer/Strings/StringPrefab" to="." method="emit_changed"]
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="emit_changed" flags=3]
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_add_string"]
