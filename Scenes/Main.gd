@@ -191,3 +191,10 @@ func _on_open_project_folder_pressed() -> void:
 	print("Project Folder: %s" % ProjectSettings.globalize_path(Data.project_path))
 	OS.shell_open(ProjectSettings.globalize_path(Data.project_path))
 	pass # Replace with function body.
+
+func _on_open_project_in_engine() -> void:
+	var local_godot: String = Data.local_config["godot_path"]
+	if local_godot.is_empty():
+		local_godot = Data.global_config["godot_path"]
+		
+	OS.shell_open(ProjectSettings.globalize_path(local_godot))
