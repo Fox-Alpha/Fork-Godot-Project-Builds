@@ -185,3 +185,9 @@ func tab_changed(tab: int) -> void:
 
 func open_logs() -> void:
 	OS.shell_open(ProjectSettings.globalize_path("user://BuildLogs"))
+
+
+func _on_open_project_folder_pressed() -> void:
+	print("Project Folder: %s" % ProjectSettings.globalize_path(Data.project_path))
+	OS.shell_open(ProjectSettings.globalize_path(Data.project_path))
+	pass # Replace with function body.

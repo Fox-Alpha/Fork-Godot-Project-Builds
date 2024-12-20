@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://ba3dlg1fj2hxv"]
 
-[ext_resource type="Script" path="res://Scenes/Main.gd" id="1_r1xkq"]
+[ext_resource type="Script" uid="uid://b3ihnixt5qryb" path="res://Scenes/Main.gd" id="1_r1xkq"]
 [ext_resource type="PackedScene" uid="uid://dwmijfw6b7ngj" path="res://Nodes/GUI/FoldableContainer.tscn" id="2_12ltr"]
 [ext_resource type="Texture2D" uid="uid://dt6drd8cw1dhl" path="res://Icons/Back.svg" id="2_fue2w"]
 [ext_resource type="PackedScene" uid="uid://cyl1d6reu3mk4" path="res://Nodes/GUI/DirectorySelector.tscn" id="2_ood4h"]
@@ -799,15 +799,24 @@ shortcut_in_tooltip = false
 text = "Back"
 icon = ExtResource("2_fue2w")
 
-[node name="OpenLogs" type="Button" parent="."]
-auto_translate_mode = 1
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -57.0
-offset_bottom = 31.0
+offset_left = -182.0
+offset_bottom = 66.0
 grow_horizontal = 0
+
+[node name="OpenProjectFolder" type="Button" parent="VBoxContainer2"]
+auto_translate_mode = 1
+layout_mode = 2
+text = "Open Project Folder"
+icon = ExtResource("6_kgk8y")
+
+[node name="OpenLogs" type="Button" parent="VBoxContainer2"]
+auto_translate_mode = 1
+layout_mode = 2
 text = "Open Logs Folder"
 icon = ExtResource("6_kgk8y")
 
@@ -827,7 +836,8 @@ metadata/_edit_lock_ = true
 [connection signal="pressed" from="VBoxContainer/TabContainer/Config/ScrollContainer2/VBoxContainer/Button" to="." method="run_project_scan"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/Config/ScrollContainer2/VBoxContainer/InstallPlugin" to="VBoxContainer/TabContainer/Config" method="_on_install_plugin_pressed"]
 [connection signal="pressed" from="Back" to="." method="go_back"]
-[connection signal="pressed" from="OpenLogs" to="." method="open_logs"]
+[connection signal="pressed" from="VBoxContainer2/OpenProjectFolder" to="." method="_on_open_project_folder_pressed"]
+[connection signal="pressed" from="VBoxContainer2/OpenLogs" to="." method="open_logs"]
 
 [editable path="VBoxContainer/TabContainer/Config/ScrollContainer2/VBoxContainer/Godot/ConfigPath"]
 [editable path="VBoxContainer/TabContainer/Config/ScrollContainer2/VBoxContainer/Godot/LocalGodot"]
