@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dnirqftg6lai"]
 
-[ext_resource type="Script" path="res://Nodes/GUI/StringProjectFilterContainer.gd" id="1_3nh7i"]
+[ext_resource type="Script" uid="uid://b25wqawo87vn7" path="res://Nodes/GUI/StringProjectFilterContainer.gd" id="1_3nh7i"]
 [ext_resource type="Texture2D" uid="uid://dyfjn7dxhnwql" path="res://Icons/Search.svg" id="2_3nh7i"]
 
 [node name="StringProjectFilterContainer" type="ScrollContainer"]

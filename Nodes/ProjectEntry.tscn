@@ -26,7 +26,7 @@ func set_project(path: String, callback: Callable):
 	
 	var tags = config.get_value(\"application\", \"config/tags\", PackedStringArray([\"\"]))
 	project_tags = tags if typeof(tags) == TYPE_PACKED_STRING_ARRAY else project_tags.append(tags)
-	if project_tags.size() > 0:
+	if project_tags.size() > 0 and !project_tags[0].is_empty() :
 		for p in project_tags:
 			var lab : Label = Label.new()
 			lab.text = \"<%s>\" % p
@@ -121,3 +121,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainerTags/HFlowContainerTags"]
+layout_mode = 2
+text = "Project Tags: "
