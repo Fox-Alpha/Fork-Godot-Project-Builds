@@ -31,6 +31,5 @@ expand_to_text_length = true
 layout_mode = 2
 icon = ExtResource("2_3nh7i")
 
-[connection signal="text_submitted" from="HBoxContainer/Strings/StringPrefab" to="." method="emit_changed"]
 [connection signal="pressed" from="HBoxContainer/Button" to="." method="emit_changed" flags=3]
 [connection signal="pressed" from="HBoxContainer/Button" to="." method="_add_string"]

@@ -8,6 +8,7 @@ signal changed
 
 func _ready() -> void:
 	#string_prefab = Prefab.create(%StringPrefab)
+	%StringPrefab.text_submitted.connect(emit_changed)
 	pass
 
 func _add_string() -> void:
@@ -41,4 +42,4 @@ func set_strings(strins: PackedStringArray):
 
 func emit_changed(_new_text:String):
 	changed.emit()
-	#print(changed.get_connections())
+	#print_debug("changed.get_connections()")
