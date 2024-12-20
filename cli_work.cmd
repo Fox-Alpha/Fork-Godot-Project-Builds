@@ -56,7 +56,8 @@ echo #####
 
 if exist "%build_project%" (
     echo Existing Binary Exports will deleted first
-	del "%build_project%" /F
+	REM del "%build_project%" /F
+	del "%build_folder%\%build_project_name%_%build_version%_%build_gdversion%".* /F
 )
 echo #####
 
