@@ -20,8 +20,8 @@ REM Profilename in export_presets.cfg
 REM set "build_profile=Windows Desktop"
 set "build_profile=Windows Desktop"
 REM export Type export-debug or export-release or export-pack (musst be .pck or .zip)
-REM set "build_type=export-debug"
-set "build_type=export-release"
+set "build_type=export-debug"
+REM set "build_type=export-release"
 REM set "build_type=export-pack"
 
 REM Version sufffix for binary name
