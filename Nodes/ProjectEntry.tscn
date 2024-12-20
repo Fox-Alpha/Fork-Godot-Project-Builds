@@ -8,6 +8,7 @@ var project_name : String = \"[unnamed]\"
 var engine_version : String = \"0.0\"
 var project_tags : PackedStringArray = []
 var project_path : String = \"\"
+var project_features : PackedStringArray = []
 
 
 func set_project(path: String, callback: Callable):
@@ -20,7 +21,14 @@ func set_project(path: String, callback: Callable):
 		printerr(\"%s\" % path)
 		return
 	
-	#engine_version = config.get_value(\"application\", \"config/name\", \"[unnamed]\")
+	var features = config.get_value(\"application\", \"config/features\", PackedStringArray([\"\"]))
+	project_features = features if typeof(features) == TYPE_PACKED_STRING_ARRAY else project_features.append(features)
+	if project_features.size() > 0 and !project_features[0].is_empty() :
+		for f in project_features:
+			var lab : Label = Label.new()
+			lab.text = \"%s\" % f
+			%VBoxContainerFeatures.add_child(lab)
+	
 	project_name = config.get_value(\"application\", \"config/name\", \"[unnamed]\")
 	%Name.text = project_name
 	
@@ -84,6 +92,14 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 mouse_filter = 2
 expand_mode = 1
+
+[node name="ScrollContainerFeatures" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="VBoxContainerFeatures" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainerFeatures"]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
