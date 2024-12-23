@@ -5,3 +5,4 @@ README.md export-ignore
 Media export-ignore
 Tests export-ignore
 addons/gut export-ignore
+core.autocrlf=true
